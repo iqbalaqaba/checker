@@ -90,9 +90,6 @@ Available options are:
   Example: `git config checker.rails-for-sass 'true'`
 
 
-As for 17.02.2013, `commit-on-warnings` and `rails-for-sass` are not yet working
-
-
 ### Available modules
 
 #### ruby
