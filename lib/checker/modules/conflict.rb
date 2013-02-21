@@ -5,7 +5,7 @@ module Checker
       private
       def check_one(file, opts = {})
         status = [check_for_conflict_start(file), check_for_conflict_end(file)].all_true?
-        {:exitstatus => 0, :success => status}
+        Checker::Result.result(self, status ? 0 : 1)
       end
 
       def check_for_conflict_start(file)
