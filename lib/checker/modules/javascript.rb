@@ -4,8 +4,7 @@ module Checker
       extensions 'js'
       private
       def check_one(file, opts = {})
-        exitstatus = plain_command("jsl -process #{file}")
-        {:exitstatus => exitstatus, :success => (exitstatus == 0 || exitstatus == 1)}
+        Checker::Result.result(self, plain_command("jsl -process #{file}"))
       end
 
       def check_for_executable
@@ -20,9 +19,9 @@ module Checker
       end
 
       def show_status(status)
-        if status == 0
+        if status == :ok
           print_success_message
-        elsif status == 1
+        elsif status == :warning
           print_warning_message
         else
           print_fail_message

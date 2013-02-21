@@ -13,7 +13,7 @@ require 'checker/result'
   require "checker/modules/#{mod}"
 end
 
-%w[default console_log].each do |res|
+%w[default console_log javascript].each do |res|
   require "checker/results/#{res}"
 end
 
