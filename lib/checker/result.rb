@@ -2,7 +2,9 @@ module Checker
   class Result
     class << self
       def result(klass, exitstatus)
-        result_class(klass).new(exitstatus)
+        debug klass
+        debug exitstatus
+        result_class(klass.classname).new(exitstatus)
       end
 
       def result_class(klass)

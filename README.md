@@ -79,8 +79,8 @@ Available options are:
 
 * commit-on-warning
 
-  Boolean value. If given true, checker will not commit when any module returns warning.
-  Defaults to false.
+  Boolean value. If given false, checker will not commit when any module returns warning.
+  Defaults to true.
   Example: `git config checker.commit-on-warning 'false'`
 
 * rails-for-sass

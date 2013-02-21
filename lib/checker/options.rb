@@ -11,7 +11,7 @@ module Checker
       end
 
       def prevent_commit_on_warning
-        get_config("commit-on-warning", "false") == "true"
+        get_config("commit-on-warning", "true") == "false"
       end
 
       def use_rails_for_sass
