@@ -4,7 +4,7 @@ describe Checker::Modules::Conflict do
   it 'checks all files' do
     files = ['a.rb', 'b.js.erb', 'c.r', 'd.yaml', 'e.yml', 'f.coffee']
     mod = Checker::Modules::Conflict.new(files)
-    mod.stub(:check_one).and_return({:exitstatus => 0})
+    mod.stub(:check_one).and_return(stub(:success? => true, :status => :ok))
     mod.should_receive(:check_one).exactly(6).times
     mod.check 
   end

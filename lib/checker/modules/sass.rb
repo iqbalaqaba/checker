@@ -18,7 +18,6 @@ module Checker
 
       def normal_check(file, opts)
         Checker::Result.result(self, plain_command("sass #{"--scss" if opts[:extension] == ".scss"} -c #{file}"))
-        exitstatus = plain_command("sass #{"--scss" if opts[:extension] == ".scss"} -c #{file}")
       end
 
       def check_for_executable
@@ -49,8 +48,12 @@ module Checker
         Dir.mkdir(dir) unless File.exists?(dir)
       end
 
+      def stylesheets_dir
+        "app/assets/stylesheets/"
+      end
+
       def checkout_file_name target
-        (Checker::Options.use_rails_for_sass && rails_with_ap?) ? "app/assets/stylesheets/checker-cache#{target}" : super
+        (Checker::Options.use_rails_for_sass && rails_with_ap?) ? "#{stylesheets_dir}checker-cache#{target}" : super
       end
 
       def proper_path file_name
