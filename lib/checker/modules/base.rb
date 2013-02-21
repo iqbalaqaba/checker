@@ -25,6 +25,10 @@ module Checker
         end
       end
 
+      def classname
+        self.class.to_s.split('::').last
+      end
+
       private
 
       def print_module_header
@@ -57,9 +61,9 @@ module Checker
           @results = files_to_check.map do |file_name|
             color "  Checking #{file_name}...", :yellow
             result = check_one_file(file_name)
-            show_status(result[:exitstatus])
-            flush_and_forget_output(result[:exitstatus])
-            result[:success]
+            show_status result.status
+            flush_and_forget_output result.status
+            result.success?
           end
         end
       end
@@ -96,8 +100,8 @@ module Checker
         execute(cmd)
       end
 
-      def flush_and_forget_output(success)
-        print @buffer.to_s unless success
+      def flush_and_forget_output(status)
+        print @buffer.to_s if (status == :warning or status == :fail)
         @buffer = ""
       end
 
@@ -113,9 +117,11 @@ module Checker
         puts " [FAIL]".red
       end
 
-      def show_status(success)
-        if success
+      def show_status(status)
+        if status == :ok
           print_success_message
+        elsif status == :warning
+          print_warning_message
         else
           print_fail_message
         end
@@ -151,7 +157,7 @@ module Checker
       end
 
       def name
-        self.class.to_s.split('::').last.underscore.upcase
+        classname.underscore.upcase
       end
 
       def use_bundler?

@@ -7,9 +7,14 @@ require 'checker/version'
 require 'checker/installator'
 require 'checker/helper'
 require 'checker/options'
+require 'checker/result'
 
 %w[base ruby haml slim pry coffeescript javascript sass yaml conflict console_log].each do |mod|
   require "checker/modules/#{mod}"
+end
+
+%w[default].each do |res|
+  require "checker/results/#{res}"
 end
 
 def debug_mode?
