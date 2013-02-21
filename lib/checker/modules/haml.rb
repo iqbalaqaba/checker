@@ -4,8 +4,7 @@ module Checker
       extensions 'haml'
       private
       def check_one(file, opts = {})
-        exitstatus = plain_command("haml --check #{file} >> /dev/null")
-        {:exitstatus => exitstatus, :success => (exitstatus == 0)}
+        Checker::Result.result(self, plain_command("haml --check #{file} >> /dev/null"))
       end
 
       def check_for_executable
