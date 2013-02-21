@@ -8,10 +8,10 @@ module Checker
       def check_one(file, opts = {})
         ret = begin
           YAML.load_file(file)
-          {:exitstatus => 0, :success => true}
+          Checker::Result.result(self, 0)
         rescue Exception => e
           puts e
-          {:exitstatus => 1, :success => false}
+          Checker::Result.result(self, 1)
         end
       end
     end
