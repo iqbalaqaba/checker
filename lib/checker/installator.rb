@@ -3,7 +3,7 @@ module Checker
     def self.template
       dir = File.dirname(__FILE__) + "/../.."
       temp = open(dir + "/templates/checker-prepare-commit-msg").read
-      temp.gsub(/CHECKER_COMMAND/, Checker::RVM.rvm_command("checker"))
+      ERB.new(temp).result
     end
 
     def self.hooks_dir

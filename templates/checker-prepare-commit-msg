@@ -1,6 +1,10 @@
 
 #### Begin of checker script
-CHECKER_COMMAND
+if [ -f <%= Checker::RVM.rvm_shell %> ]; then
+  <%= Checker::RVM.rvm_command("checker") %>
+else
+  checker
+fi
 
 if [ $? = 1 ]; then
   exit 1

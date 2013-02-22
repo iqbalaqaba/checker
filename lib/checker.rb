@@ -1,5 +1,6 @@
 require 'colorize'
 require 'digest/md5'
+require 'erb'
 
 require 'checker/core_ext'
 require 'checker/rvm'
