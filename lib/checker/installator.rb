@@ -1,8 +1,8 @@
 module Checker
   class Installator
     def self.template
-      dir = File.dirname(__FILE__) + "/../.."
-      temp = open(dir + "/templates/checker-prepare-commit-msg").read
+      dir = File.expand_path('../../..', __FILE__)
+      temp = File.read(File.join(dir, "/templates/checker-prepare-commit-msg"))
       ERB.new(temp).result
     end
 
