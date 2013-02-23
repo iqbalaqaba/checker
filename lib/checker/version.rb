@@ -1,3 +1,3 @@
 module Checker
-  VERSION = '0.6.5.rc1'
+  VERSION = '0.6.5.rc2'
 end
