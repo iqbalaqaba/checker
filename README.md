@@ -2,6 +2,12 @@
 
 A collection of modules for which every is designed to check syntax in files to be commited via git.
 
+## Compatibility
+
+Checker works with rubies ree, 1.8.7, 1.9.2, 1.9.3 and 2.0.0 - all of those are tested on Travis.
+As for Rails with SASS - tested with RoR 3.2.x
+
+
 ## Usage
 
 ### Install
@@ -22,13 +28,17 @@ After installing the gem please follow [Git hook](#git-hook) section for further
 ### Git hook
 
 All you need to do is type in `checker install` and it will automatically install the prepare-commit-msg hook
-to your current git project. It will look like this:
+to your current git project. It will look something like this:
 
 ```
 #!/bin/bash 
  
 #### Begin of checker script
-checker
+if [ -f /Users/user/.rvm/bin/rvm-shell ]; then
+  /Users/user/.rvm/bin/rvm-shell 'ruby-1.9.3-p286' -c 'checker'
+else
+  checker
+fi
 
 if [ $? = 1 ]; then
   exit 1
