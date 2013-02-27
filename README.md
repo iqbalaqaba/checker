@@ -11,10 +11,16 @@ As for Rails with SASS - tested with RoR 3.2.x
 ## Usage
 
 ### Install
-Checker is available in rubygems, so you just need to do:
+Checker is available in rubygems (current stable version is 0.6.4), so you just need to do:
 ```
 gem install checker
 ```
+
+If you want to install release candidate version (current rc version is 0.6.5.rc2) use the following command:
+```
+gem install checker --pre
+```
+
 If you are using bundler, you can add it to your project via `Gemfile` file (best to put it under `:development` group).
 Since checker is a command-line utility, there is no need to load it up in the application:
 ```ruby
