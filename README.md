@@ -1,4 +1,4 @@
-# Checker [![Build Status](https://secure.travis-ci.org/netguru/checker.png?branch=master)](http://travis-ci.org/netguru/checker) [![Coverage Status](https://coveralls.io/repos/netguru/checker/badge.png?branch=master)](https://coveralls.io/r/netguru/checker)
+# Checker [![Build Status](https://secure.travis-ci.org/netguru/checker.png?branch=master)](http://travis-ci.org/netguru/checker) [![Coverage Status](https://coveralls.io/repos/netguru/checker/badge.png?branch=master)](https://coveralls.io/r/netguru/checker) [![Code Climate](https://codeclimate.com/github/netguru/checker.png)](https://codeclimate.com/github/netguru/checker)
 
 A collection of modules for which every is designed to check syntax in files to be commited via git.
 
