@@ -1,6 +1,13 @@
 module Checker
   module Modules
-    class Base < Struct.new(:files)
+    class Base
+      attr_accessor :files, :full_results
+
+      def initialize(file_list = nil)
+        self.files = file_list
+        self.full_results = {:total => 0, :ok => 0, :warning => 0, :fail => 0}
+      end
+
       def check
         check_files_existing or return true
         print_module_header
@@ -59,9 +66,11 @@ module Checker
       def check_all_files
         with_checker_cache do
           @results = files_to_check.map do |file_name|
+            self.full_results[:total] += 1
             color "  Checking #{file_name}...", :yellow
             result = check_one_file(file_name)
             show_status result.status
+            gather_result result.status
             flush_and_forget_output result.status
             result.success?
           end
@@ -87,6 +96,10 @@ module Checker
         else
           @extensions += args
         end
+      end
+
+      def gather_result result
+        self.full_results[result] += 1
       end
 
       def plain_command(cmd, options = {})

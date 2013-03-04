@@ -42,6 +42,7 @@ module Checker
         puts "[ CHECKER #{Checker::VERSION} - #{files_checked.size} files ]".light_blue
 
         results = module_instances.map(&:check)
+        show_full_status module_instances
         exit (results.all_true? ? 0 : 1)
       end
 
@@ -65,6 +66,19 @@ module Checker
 
       def modified_files
         @modified_files ||= `git status --porcelain | egrep "^(A|M|R).*" | awk ' { if ($3 == "->") print $4; else print $2 } '`.split
+      end
+
+      def show_full_status modules
+        full_status = {:total => 0, :ok => 0, :warning => 0, :fail => 0}
+        modules.each do |m|
+          full_status = full_status.merge(m.full_results) { |k, v1, v2| v1 + v2 }
+        end
+        print "#{full_status[:total]} checks preformed, "
+        print "#{full_status[:ok]} ok".green
+        print ", "
+        print "#{full_status[:warning]} warning".magenta
+        print ", "
+        puts "#{full_status[:fail]} fail".red
       end
     end
   end
