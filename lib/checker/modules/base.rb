@@ -66,7 +66,7 @@ module Checker
       def check_all_files
         with_checker_cache do
           @results = files_to_check.map do |file_name|
-            self.full_results[:total] += 1
+            gather_result :total
             color "  Checking #{file_name}...", :yellow
             result = check_one_file(file_name)
             show_status result.status
