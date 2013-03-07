@@ -9,11 +9,11 @@ module Checker
       end
 
       def check_for_conflict_start(file)
-        !plain_command("grep -n \"<<<<<<< \" #{file}", :bundler => false, :return_boolean => true)
+        !plain_command("grep -n \"<<<<<<< \" #{file}", :bundler => false, :return_boolean => true, :rvm => false)
       end
 
       def check_for_conflict_end(file)
-        !plain_command("grep -n \">>>>>>> \" #{file}", :bundler => false, :return_boolean => true)
+        !plain_command("grep -n \">>>>>>> \" #{file}", :bundler => false, :return_boolean => true, :rvm => false)
       end
     end
   end

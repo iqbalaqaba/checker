@@ -158,9 +158,9 @@ module Checker
       end
 
       def parse_command command, options
-        options = { :bundler => true, :output => true }.merge(options)
+        options = { :bundler => true, :output => true, :rvm => true }.merge(options)
         command = bundler_command(command) if use_bundler? && options[:bundler]
-        command = rvm_command(command) if use_rvm?
+        command = rvm_command(command) if use_rvm? && options[:rvm]
         command << " > /dev/null" unless options[:output]
         "#{command} 2>&1"
       end

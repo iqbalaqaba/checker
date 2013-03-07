@@ -5,7 +5,7 @@ module Checker
 
       private
       def check_one(file, opts = {})
-        Checker::Result.result(self, plain_command("grep -n \"console\\.log\" #{file}", :bundler => false))
+        Checker::Result.result(self, plain_command("grep -n \"console\\.log\" #{file}", :bundler => false, :rvm => false))
       end
 
       def show_status(status)

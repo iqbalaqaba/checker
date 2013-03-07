@@ -9,11 +9,11 @@ module Checker
       end
 
       def check_for_binding_pry(file)
-        !plain_command("grep -n \"binding\\.pry\" #{file}", :bundler => false, :return_boolean => true)
+        !plain_command("grep -n \"binding\\.pry\" #{file}", :bundler => false, :return_boolean => true, :rvm => false)
       end
 
       def check_for_binding_remote_pry(file)
-        !plain_command("grep -n \"binding\\.remote_pry\" #{file}", :bundler => false, :return_boolean => true)
+        !plain_command("grep -n \"binding\\.remote_pry\" #{file}", :bundler => false, :return_boolean => true, :rvm => false)
       end
     end
   end

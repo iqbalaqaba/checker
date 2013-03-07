@@ -4,6 +4,8 @@ module Checker
   class CLI
     class << self
       def execute
+        directory_to_check = nil
+
         if ARGV.size == 0
           modules = get_modules_to_check
         else
@@ -15,6 +17,9 @@ module Checker
             Checker::Helper.show_help!
           elsif ARGV[0] == "modules"
             Checker::Helper.show_modules!(self.available_modules)
+          elsif File.exist?(ARGV[0]) && File.directory?(ARGV[0])
+            directory_to_check = ARGV[0].gsub /\/+$/, ''
+            modules = 'all'
           else
             modules = ARGV.map(&:downcase)
           end
@@ -32,7 +37,11 @@ module Checker
         end
 
         module_instances = []
-        files = modified_files
+        if !directory_to_check.nil?
+          files = Dir["#{directory_to_check}/**/*"]
+        else
+          files = modified_files
+        end
         modules.each do |mod|
           klass = "Checker::Modules::#{mod.classify}".constantize
           module_instances << klass.new(files.dup)
