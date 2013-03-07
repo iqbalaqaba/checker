@@ -4,7 +4,7 @@ module Checker
       extensions 'scss', 'sass'
       private
       def check_one(file, opts = {})
-        if Checker::Options.use_rails_for_sass
+        if preconditions_for_rails?(file) && Checker::Options.use_rails_for_sass
           rails_check(file, opts)
         else
           normal_check(file, opts)
@@ -29,6 +29,10 @@ module Checker
         str << "Install sass from rubygems: 'gem install sass'\n"
         str << "Sass requires haml to work properly: 'gem install haml'\n"
         str
+      end
+
+      def preconditions_for_rails?(file)
+        File.read(file).include? "@import"
       end
 
       ## for rails project

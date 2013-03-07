@@ -50,9 +50,34 @@ describe Checker::Modules::Sass do
       `rm -rf spec/assets/stylesheets/checker-cache*`
     end
 
+    it "runs rails check if preconditions_for_rails are met" do
+      files = ["a.sass"]
+      mod = Checker::Modules::Sass.new(files)
+      mod.stub(:preconditions_for_rails?).and_return(true)
+      mod.stub(:rails_project?).and_return(true)
+      mod.stub(:rails_with_ap?).and_return(true)
+      mod.stub(:check_for_executable).and_return(true)
+      mod.stub(:stylesheets_dir).and_return("spec/assets/stylesheets/")
+      mod.should_receive(:rails_check).and_return(Checker::Result.result(mod, 0))
+      mod.check
+    end
+
+    it "runs normal check if preconditions_for_rails aren't met" do
+      files = ["a.sass"]
+      mod = Checker::Modules::Sass.new(files)
+      mod.stub(:preconditions_for_rails?).and_return(false)
+      mod.stub(:rails_project?).and_return(true)
+      mod.stub(:rails_with_ap?).and_return(true)
+      mod.stub(:check_for_executable).and_return(true)
+      mod.stub(:stylesheets_dir).and_return("spec/assets/stylesheets/")
+      mod.should_receive(:normal_check).and_return(Checker::Result.result(mod, 0))
+      mod.check
+    end
+
     it "gives proper command to sass module while checking .sass files" do
       files = ["a.sass"]
       mod = Checker::Modules::Sass.new(files)
+      mod.stub(:preconditions_for_rails?).and_return(true)
       mod.stub(:rails_project?).and_return(true)
       mod.stub(:rails_with_ap?).and_return(true)
       mod.stub(:check_for_executable).and_return(true)
@@ -64,6 +89,7 @@ describe Checker::Modules::Sass do
     it "gives proper command to sass module while checking .scss files" do
       files = ["a.scss"]
       mod = Checker::Modules::Sass.new(files)
+      mod.stub(:preconditions_for_rails?).and_return(true)
       mod.stub(:rails_project?).and_return(true)
       mod.stub(:rails_with_ap?).and_return(true)
       mod.stub(:check_for_executable).and_return(true)
