@@ -1,3 +1,11 @@
+=== version 0.6.6 (released 2013-06-03)
+
+* you can now check all files inside specific directory
+* faster checks for binding.pry / console.log / conflict
+* sass check will use rails runner only if @import found in sass file
+* fix bug with no executable found
+* new fancy output
+
 === version 0.6.5.rc2 (released 2013-02-23)
 
 * works with rbenv
