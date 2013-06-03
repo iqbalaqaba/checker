@@ -4,7 +4,7 @@ require File.expand_path('../lib/checker/version', __FILE__)
 Gem::Specification.new do |s|
   s.name        = 'checker'
   s.version     = Checker::VERSION
-  s.date        = '2013-03-01'
+  s.date        = '2013-06-03'
   s.summary     = "Syntax checker for various files"
   s.description = "A collection of modules which every is designed to check syntax for specific files."
   s.authors     = ["Jacek Jakubik", "Tomasz Pewiński"]
