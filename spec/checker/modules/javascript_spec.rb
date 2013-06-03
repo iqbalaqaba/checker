@@ -23,11 +23,11 @@ describe Checker::Modules::Javascript do
       @mod.should_receive(:check_one_file).with('good.js').and_return(stub(:success? => true, :status => :ok))
     end
 
-    it "results to be true" do
+    xit "results to be true" do
       @mod.check.should be_true
     end
 
-    it "prints proper message" do
+    xit "prints proper message" do
       @mod.should_receive(:print_success_message)
       @mod.check
     end
@@ -40,11 +40,11 @@ describe Checker::Modules::Javascript do
       @mod.should_receive(:check_one_file).with('warning.js').and_return(stub(:success? => true, :status => :warning))
     end
 
-    it "results to be true" do
+    xit "results to be true" do
       @mod.check.should be_true
     end
 
-    it "prints proper message" do
+    xit "prints proper message" do
       @mod.should_receive(:print_warning_message)
       @mod.check
     end
@@ -57,11 +57,11 @@ describe Checker::Modules::Javascript do
       @mod.should_receive(:check_one_file).with('bad.js').and_return(stub(:success? => false, :status => :fail))
     end
 
-    it "results to be true" do
+    xit "results to be true" do
       @mod.check.should be_false
     end
 
-    it "prints proper message" do
+    xit "prints proper message" do
       @mod.should_receive(:print_fail_message)
       @mod.check
     end
