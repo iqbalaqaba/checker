@@ -108,9 +108,9 @@ module Checker
       end
 
       def silent_command(cmd, options = {})
-        options = { :output => false }.merge(options)
+        options = { :output => false, :return_boolean => true }.merge(options)
         cmd = parse_command(cmd, options)
-        execute(cmd)
+        execute(cmd, options)
       end
 
       def flush_and_forget_output(status)

@@ -82,6 +82,7 @@ module Checker
         modules.each do |m|
           full_status = full_status.merge(m.full_results) { |k, v1, v2| v1 + v2 }
         end
+        puts  "-" * 80
         print "#{full_status[:total]} checks preformed, "
         print "#{full_status[:ok]} ok".green
         print ", "
