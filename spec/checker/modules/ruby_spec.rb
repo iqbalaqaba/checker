@@ -11,39 +11,39 @@ describe Checker::Modules::Ruby do
     mod.check 
   end
 
-  # 1.8
-  if RUBY_VERSION < "1.9"
-    it "should pass the syntax check" do
-      files = [fixture("ruby", "1.8/good.rb")]
-      mod = Checker::Modules::Ruby.new(files)
-      mod.check.should be_true
-    end
+  # # 1.8
+  # if RUBY_VERSION < "1.9"
+  #   it "should pass the syntax check" do
+  #     files = [fixture("ruby", "1.8/good.rb")]
+  #     mod = Checker::Modules::Ruby.new(files)
+  #     mod.check.should be_true
+  #   end
 
-    it "should not pass the syntax check" do
-      files = [fixture("ruby", "1.8/bad.rb")]
-      mod = Checker::Modules::Ruby.new(files)
-      mod.check.should be_false
-    end
+  #   it "should not pass the syntax check" do
+  #     files = [fixture("ruby", "1.8/bad.rb")]
+  #     mod = Checker::Modules::Ruby.new(files)
+  #     mod.check.should be_false
+  #   end
 
-    it "should not pass the syntax check" do
-      files = [fixture("ruby", "1.8/bad2.rb")]
-      mod = Checker::Modules::Ruby.new(files)
-      mod.check.should be_false
-    end
-  end
+  #   it "should not pass the syntax check" do
+  #     files = [fixture("ruby", "1.8/bad2.rb")]
+  #     mod = Checker::Modules::Ruby.new(files)
+  #     mod.check.should be_false
+  #   end
+  # end
 
-  if RUBY_VERSION >= "1.9"
-    it "should pass the syntax check" do
-      files = [fixture("ruby", "1.9/good.rb")]
-      mod = Checker::Modules::Ruby.new(files)
-      mod.check.should be_true
-    end
+  # # 1.9
+  # if RUBY_VERSION >= "1.9"
+  #   it "should pass the syntax check" do
+  #     files = [fixture("ruby", "1.9/good.rb")]
+  #     mod = Checker::Modules::Ruby.new(files)
+  #     mod.check.should be_true
+  #   end
 
-    it "should not pass the syntax check" do
-      files = [fixture("ruby", "1.9/bad.rb")]
-      mod = Checker::Modules::Ruby.new(files)
-      mod.check.should be_false
-    end
-  end
-  # 1.9
+  #   it "should not pass the syntax check" do
+  #     files = [fixture("ruby", "1.9/bad.rb")]
+  #     mod = Checker::Modules::Ruby.new(files)
+  #     mod.check.should be_false
+  #   end
+  # end
 end
