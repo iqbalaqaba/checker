@@ -10,11 +10,11 @@ require 'checker/helper'
 require 'checker/options'
 require 'checker/result'
 
-%w[base ruby haml slim pry coffeescript javascript sass yaml conflict console_log].each do |mod|
+%w[base ruby haml slim pry coffeescript javascript sass yaml conflict console_log rubocop].each do |mod|
   require "checker/modules/#{mod}"
 end
 
-%w[default console_log javascript].each do |res|
+%w[default console_log javascript rubocop].each do |res|
   require "checker/results/#{res}"
 end
 
