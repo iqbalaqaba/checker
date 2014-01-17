@@ -24,7 +24,7 @@ If you are using bundler, you can add it to your project via `Gemfile` file (bes
 Since checker is a command-line utility, there is no need to load it up in the application:
 ```ruby
 group :development do
-  gem 'checker', :required => false
+  gem 'checker', :require => false
 end
 ```
 
