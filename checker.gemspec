@@ -14,6 +14,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.homepage    = 'http://github.com/netguru/checker'
   s.add_dependency 'colorize', '0.6.0'
-  s.add_dependency 'rubocop', '~> 0.13.0'
+  s.add_dependency 'rubocop', '~> 0.28.0'
   s.add_development_dependency "coveralls"
 end
