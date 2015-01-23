@@ -36,8 +36,8 @@ All you need to do is type in `checker install` and it will automatically instal
 to your current git project. It will look something like this:
 
 ```
-#!/bin/bash 
- 
+#!/bin/bash
+
 #### Begin of checker script
 if [ -f /Users/user/.rvm/bin/rvm-shell ]; then
   /Users/user/.rvm/bin/rvm-shell 'ruby-1.9.3-p286' -c 'checker'
@@ -128,6 +128,9 @@ Checks for correct syntax in slim files
 #### conflict
 Checks for any occurence of git conflicts when merging (looks for `<<<<<<< ` or `>>>>>>> `)
 
+#### rubocop
+Checks for if code follows the style guides ( https://github.com/bbatsov/rubocop )
+
 ### Dependencies
 
 For various modules to work you may need to install additional dependencies:
@@ -135,5 +138,6 @@ For various modules to work you may need to install additional dependencies:
 * coffeescript - `npm install -g coffee-script` - see https://github.com/jashkenas/coffee-script/
 * javascript - install jsl binary - see http://www.javascriptlint.com/download.htm
 * haml & sass & slim - `gem install haml sass slim`
+* rubocop - `gem install rubocop`
 
-Copyright (c) 2014 Netguru. See LICENSE for further details.
+Copyright (c) 2015 Netguru. See LICENSE for further details.
