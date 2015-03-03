@@ -11,7 +11,6 @@ A collection of modules for which every is designed to check syntax in files to 
 Checker works with rubies 1.9.2, 1.9.3 and 2.x.
 As for Rails with SASS - tested with RoR 3.2.x
 
-
 ## Usage
 
 ### Install

@@ -21,7 +21,7 @@ CHANGES
 * new state: warning. it is using by couple of checks (console.log, javascript)
 * added two more options: commit-on-warning and rails-for-sass (see readme for docs)
 * added check for console.log existance - returns warning if found
-* added reinstall script for git hook 
+* added reinstall script for git hook
 * updated sass check to use rails runner if project is using asset-pipeline
 * fixed bug when checker was running from system ruby version from git hook, not current rvm one
   (checker reinstall required)
@@ -56,7 +56,7 @@ CHANGES
 
 === version 0.0.5 (released 2012-07-09)
 
-* depencendy message - if executable not found, 
+* depencendy message - if executable not found,
   then proper message is displayed
   where to fetch executable for module
 * fix ruby module, it should check only .rb files now
