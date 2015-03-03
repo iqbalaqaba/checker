@@ -8,7 +8,7 @@ A collection of modules for which every is designed to check syntax in files to 
 
 ## Compatibility
 
-Checker works with rubies ree, 1.8.7, 1.9.2, 1.9.3 and 2.0.0 - all of those are tested on Travis.
+Checker works with rubies 1.9.2, 1.9.3 and 2.x.
 As for Rails with SASS - tested with RoR 3.2.x
 
 
