@@ -14,7 +14,7 @@ As for Rails with SASS - tested with RoR 3.2.x
 ## Usage
 
 ### Install
-Checker is available in rubygems (current stable version is 0.6.6), so you just need to do:
+Checker is available in rubygems (current stable version is 0.7.0), so you just need to do:
 ```
 gem install checker
 ```

@@ -1,3 +1,9 @@
+=== version 0.7.0 (released 2015-03-02)
+
+* support for ruby 1.8 and ree is now gone
+* added rubocop module
+* some minor changes
+
 === version 0.6.6 (released 2013-06-03)
 
 * you can now check all files inside specific directory
