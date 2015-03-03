@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    checker (0.6.6)
+    checker (0.7.0)
       colorize (~> 0.7.0)
       rubocop (~> 0.28.0)
 
