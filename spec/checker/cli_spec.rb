@@ -21,7 +21,7 @@ end
 describe Checker::CLI do
   context "running without arguments" do
     it "should run checks on modules from git config" do
-      allow(ARGV).to receive(:size).and_return 0
+      allow(ARGV).to receive(:empty?).and_return true
       expect(Checker::CLI).to receive(:get_modules_to_check).and_return(["bogus"])
       expect(Checker::CLI).to receive(:exit).with(0).and_return true
       Checker::CLI.execute
