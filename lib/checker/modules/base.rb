@@ -63,17 +63,19 @@ module Checker
         true
       end
 
+      def after_check
+      end
+
       def check_all_files
-        with_checker_cache do
-          @results = files_to_check.map do |file_name|
-            gather_result :total
-            color "  Checking #{file_name}...", :yellow
-            result = check_one_file(file_name)
-            show_status result.status
-            gather_result result.status
-            flush_and_forget_output result.status
-            result.success?
-          end
+        @results = files_to_check.map do |file_name|
+          gather_result :total
+          color "  Checking #{file_name}...", :yellow
+          result = check_one_file(file_name)
+          show_status result.status
+          gather_result result.status
+          flush_and_forget_output result.status
+          after_check
+          result.success?
         end
       end
 
