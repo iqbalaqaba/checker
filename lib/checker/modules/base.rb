@@ -85,8 +85,7 @@ module Checker
       def check_one_file file_name
         checksum = ::Digest::MD5.hexdigest(file_name)
         debug(file_name)
-        checkout_file(file_name, checksum)
-        check_one(checkout_file_name(checksum), :extension => File.extname(file_name))
+        check_one(file_name, :extension => File.extname(file_name))
       end
 
       def self.extensions *args
