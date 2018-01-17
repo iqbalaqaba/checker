@@ -1,6 +1,6 @@
 class CoreExt
   def self.constantize(camel_cased_word)
-    names = camel_cased_word.split('::')
+    names = camel_cased_word.split("::")
     names.shift if names.empty? || names.first.empty?
 
     constant = Object
@@ -12,16 +12,14 @@ class CoreExt
 
   def self.classify(underscored_word)
     words = underscored_word.split("_")
-    words.each do |word|
-      word.capitalize!
-    end.join("")
+    words.each(&:capitalize!).join("")
   end
 
   def self.underscore(camel_cased_word)
     word = camel_cased_word.to_s.dup
-    word.gsub!(/::/, '/')
-    word.gsub!(/([A-Z]+)([A-Z][a-z])/,'\1_\2')
-    word.gsub!(/([a-z\d])([A-Z])/,'\1_\2')
+    word.gsub!(/::/, "/")
+    word.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
+    word.gsub!(/([a-z\d])([A-Z])/, '\1_\2')
     word.tr!("-", "_")
     word.downcase!
     word
@@ -43,12 +41,12 @@ class String
 
   def ends_with?(patt)
     patt = Regexp.new(Regexp.escape(patt) + "$")
-    self.match patt
+    match patt
   end
 end
 
 class Array
   def all_true?
-    self.all? {|o| o == true}
+    all? { |o| o == true }
   end
 end

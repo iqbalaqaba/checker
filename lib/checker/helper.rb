@@ -13,7 +13,7 @@ module Checker
     end
 
     def self.show_modules!(modules)
-      puts "Available modules are: all, #{modules.join(", ")}"
+      puts "Available modules are: all, #{modules.join(', ')}"
       exit 0
     end
   end

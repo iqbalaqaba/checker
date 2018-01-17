@@ -3,7 +3,7 @@ module Checker
     class Multifile < Base
       def check_all_files
         gather_result :total
-        color "  Checking #{files_to_check.join(", ")}...", :yellow
+        color "  Checking #{files_to_check.join(', ')}...", :yellow
         result = check_all(files_to_check)
         show_status result.status
         gather_result result.status

@@ -1,10 +1,10 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Checker::Modules::Pry do
-  it 'should check all files' do
-    files = ['a.rb', 'b.js.erb', 'c.r', 'd.yaml', 'e.yml', 'f.coffee']
+  it "should check all files" do
+    files = ["a.rb", "b.js.erb", "c.r", "d.yaml", "e.yml", "f.coffee"]
     mod = Checker::Modules::Pry.new(files)
-    allow(mod).to receive(:check_one).and_return(double(:success? => true, :status => :ok))
+    allow(mod).to receive(:check_one).and_return(double(success?: true, status: :ok))
     expect(mod).to receive(:check_one).exactly(6).times
     mod.check
   end

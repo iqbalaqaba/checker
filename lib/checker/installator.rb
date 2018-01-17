@@ -1,7 +1,7 @@
 module Checker
   class Installator
     def self.template
-      dir = File.expand_path('../../..', __FILE__)
+      dir = File.expand_path("../../..", __FILE__)
       temp = File.read(File.join(dir, "/templates/checker-prepare-commit-msg"))
       ERB.new(temp).result
     end
@@ -21,7 +21,7 @@ module Checker
       check_hook!
 
       pre_commit = "#{hooks_dir}/prepare-commit-msg"
-      if File.exists?(pre_commit)
+      if File.exist?(pre_commit)
         puts "Removing current git precommit hook..."
         File.delete(pre_commit)
       end
@@ -36,9 +36,9 @@ module Checker
       if File.exist?(pre_commit)
         puts "Appending checker script to existing prepare-commit-msg hook..."
         begin
-          open(pre_commit, 'a') do |f| 
-            f.puts(self.template)
-            f.chmod(0755)
+          open(pre_commit, "a") do |f|
+            f.puts(template)
+            f.chmod(0o755)
           end
         rescue Exception => e
           puts "Couldn't append checker script: #{e.message}"
@@ -46,12 +46,12 @@ module Checker
         end
         exit 0
       else
-        tmp = self.template
+        tmp = template
         str = "#!/bin/bash \n #{tmp}"
         begin
-          open(pre_commit, "w") do |f| 
+          open(pre_commit, "w") do |f|
             f.puts(str)
-            f.chmod(0755)
+            f.chmod(0o755)
           end
         rescue Exception => e
           puts "Couldn't write checker script: #{e.message}"

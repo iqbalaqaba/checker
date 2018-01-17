@@ -1,11 +1,13 @@
-require 'yaml'
+require "yaml"
 
 module Checker
   module Modules
     class Yaml < Base
-      extensions 'yaml', 'yml'
+      extensions "yaml", "yml"
+
       private
-      def check_one(file, opts = {})
+
+      def check_one(file, _opts = {})
         ret = begin
           YAML.load_file(file)
           Checker::Result.result(self, 0)

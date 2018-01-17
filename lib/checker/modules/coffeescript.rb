@@ -1,14 +1,16 @@
 module Checker
   module Modules
     class Coffeescript < Base
-      extensions 'coffee'
+      extensions "coffee"
+
       private
-      def check_one(file, opts = {})
+
+      def check_one(file, _opts = {})
         Checker::Result.result(self, plain_command("cat #{file} | egrep -v '^//=' | coffee -sc > /dev/null"))
       end
 
       def check_for_executable
-        silent_command('coffee -v', :bundler => false)
+        silent_command("coffee -v", bundler: false)
       end
 
       def dependency_message

@@ -5,13 +5,13 @@ module Checker
 
       def initialize(file_list = nil)
         self.files = file_list
-        self.full_results = {:total => 0, :ok => 0, :warning => 0, :fail => 0}
+        self.full_results = { total: 0, ok: 0, warning: 0, fail: 0 }
       end
 
       def check
-        check_files_existing or return true
+        check_files_existing || (return true)
         print_module_header
-        check_executable or return true
+        check_executable || (return true)
         check_all_files
         valid?
       end
@@ -23,17 +23,17 @@ module Checker
       def files_to_check
         @files_to_check ||= begin
           if self.class.extensions.any?
-            self.files.select { |f|
+            files.select do |f|
               self.class.extensions.map { |ex| f.ends_with?(".#{ex}") }.any?
-            }
+            end
           else
-            self.files
+            files
           end
         end
       end
 
       def classname
-        self.class.to_s.split('::').last
+        self.class.to_s.split("::").last
       end
 
       private
@@ -63,8 +63,7 @@ module Checker
         true
       end
 
-      def after_check
-      end
+      def after_check; end
 
       def check_all_files
         @results = files_to_check.map do |file_name|
@@ -79,18 +78,18 @@ module Checker
         end
       end
 
-      def check_one(filename, options = {})
+      def check_one(_filename, _options = {})
         puts "Called from #{self.class} - extend me in here!"
         false
       end
 
-      def check_one_file file_name
+      def check_one_file(file_name)
         checksum = ::Digest::MD5.hexdigest(file_name)
         debug(file_name)
-        check_one(file_name, :extension => File.extname(file_name))
+        check_one(file_name, extension: File.extname(file_name))
       end
 
-      def self.extensions *args
+      def self.extensions(*args)
         @extensions ||= []
         if args.empty?
           @extensions
@@ -99,8 +98,8 @@ module Checker
         end
       end
 
-      def gather_result result
-        self.full_results[result] += 1
+      def gather_result(result)
+        full_results[result] += 1
       end
 
       def plain_command(cmd, options = {})
@@ -109,13 +108,13 @@ module Checker
       end
 
       def silent_command(cmd, options = {})
-        options = { :output => false, :return_boolean => true }.merge(options)
+        options = { output: false, return_boolean: true }.merge(options)
         cmd = parse_command(cmd, options)
         execute(cmd, options)
       end
 
       def flush_and_forget_output(status)
-        print @buffer.to_s if (status == :warning or status == :fail)
+        print @buffer.to_s if (status == :warning) || (status == :fail)
         @buffer = ""
       end
 
@@ -151,15 +150,15 @@ module Checker
       end
 
       def exitstatus
-        $? && $?.exitstatus
+        $CHILD_STATUS && $CHILD_STATUS.exitstatus
       end
 
       def success?
-        $? && $?.success?
+        $CHILD_STATUS && $CHILD_STATUS.success?
       end
 
-      def parse_command command, options
-        options = { :bundler => true, :output => true, :rvm => true }.merge(options)
+      def parse_command(command, options)
+        options = { bundler: true, output: true, rvm: true }.merge(options)
         command = bundler_command(command) if use_bundler? && options[:bundler]
         command = rvm_command(command) if use_rvm? && options[:rvm]
         command << " > /dev/null" unless options[:output]
@@ -167,7 +166,7 @@ module Checker
       end
 
       def color(str, color)
-        print str.colorize(color) if str.length > 0
+        print str.colorize(color) unless str.empty?
       end
 
       def name
@@ -175,7 +174,7 @@ module Checker
       end
 
       def use_bundler?
-        File.exists?("Gemfile.lock")
+        File.exist?("Gemfile.lock")
       end
 
       def bundler_command(command)
@@ -183,7 +182,7 @@ module Checker
       end
 
       def use_rvm?
-        File.exists?(rvm_shell)
+        false
       end
 
       def rails_project?
@@ -191,7 +190,7 @@ module Checker
       end
 
       def rails_with_ap?
-        rails_project? && File.exists?("app/assets")
+        rails_project? && File.exist?("app/assets")
       end
 
       def rvm_command(command)
@@ -203,21 +202,19 @@ module Checker
       end
 
       def with_checker_cache
-        begin
-          `mkdir .checker-cache`
-          yield if block_given?
-        ensure
-          `rm -rf .checker-cache > /dev/null 2>&1`
-          ## for sass check
-          `rm -rf app/assets/stylesheets/checker-cache*` if rails_with_ap?
-        end
+        `mkdir .checker-cache`
+        yield if block_given?
+      ensure
+        `rm -rf .checker-cache > /dev/null 2>&1`
+        ## for sass check
+        `rm -rf app/assets/stylesheets/checker-cache*` if rails_with_ap?
       end
 
-      def checkout_file file_name, target
+      def checkout_file(file_name, target)
         `git show :0:#{file_name} > #{checkout_file_name(target)} 2>/dev/null`
       end
 
-      def checkout_file_name target
+      def checkout_file_name(target)
         ".checker-cache/#{target}"
       end
     end

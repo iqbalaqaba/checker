@@ -3,7 +3,7 @@ module Checker
     class << self
       def get_config(conf, default = nil)
         config = `git config checker.#{conf}`.chomp
-        (config.empty? && !default.nil?) ? default : config
+        config.empty? && !default.nil? ? default : config
       end
 
       def modules_to_check

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Checker::Modules::Base do
   describe "rvm_command method" do

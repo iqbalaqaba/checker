@@ -1,10 +1,10 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Checker::Modules::ConsoleLog do
-  it 'checks coffee and js files' do
-    files = ['a.rb', 'b.js.erb', 'c.r', 'd.yaml', 'e.yml', 'f.coffee', 'g.js']
+  it "checks coffee and js files" do
+    files = ["a.rb", "b.js.erb", "c.r", "d.yaml", "e.yml", "f.coffee", "g.js"]
     mod = Checker::Modules::ConsoleLog.new(files)
-    allow(mod).to receive(:check_one).and_return(double(:success? => true, :status => :ok))
+    allow(mod).to receive(:check_one).and_return(double(success?: true, status: :ok))
     expect(mod).to receive(:check_one).exactly(2).times
     mod.check
   end

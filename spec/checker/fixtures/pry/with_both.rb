@@ -1,4 +1,3 @@
 binding.pry
-def test
-end
+def test; end
 binding.remote_pry

@@ -1,3 +1,3 @@
 def test
-  {some: 'random', hash: 'qwe'}
+  { some: "random", hash: "qwe" }
 end

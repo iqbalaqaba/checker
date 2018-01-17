@@ -1,9 +1,11 @@
 module Checker
   module Modules
     class Haml < Base
-      extensions 'haml'
+      extensions "haml"
+
       private
-      def check_one(file, opts = {})
+
+      def check_one(file, _opts = {})
         Checker::Result.result(self, plain_command("haml --check #{file} >> /dev/null"))
       end
 

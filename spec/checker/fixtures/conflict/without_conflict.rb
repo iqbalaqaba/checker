@@ -1,2 +1,1 @@
-def test
-end
+def test; end

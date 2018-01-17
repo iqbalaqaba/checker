@@ -1,9 +1,11 @@
 module Checker
   module Modules
     class Slim < Base
-      extensions 'slim'
+      extensions "slim"
+
       private
-      def check_one(file, opts = {})
+
+      def check_one(file, _opts = {})
         Checker::Result.result(self, plain_command("slimrb --compile #{file} >> /dev/null"))
       end
 

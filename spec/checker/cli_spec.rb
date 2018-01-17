@@ -1,11 +1,13 @@
-require 'spec_helper'
+require "spec_helper"
 
 module Checker
   module Modules
     class Bogus < Base
-      extensions '.test'
+      extensions ".test"
+
       private
-      def check_one(file)
+
+      def check_one(_file)
         true
       end
 

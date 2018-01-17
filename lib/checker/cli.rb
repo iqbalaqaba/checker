@@ -1,4 +1,4 @@
-require 'checker'
+require "checker"
 
 module Checker
   class CLI
@@ -6,7 +6,7 @@ module Checker
       def execute
         directory_to_check = nil
 
-        if ARGV.size == 0
+        if ARGV.empty?
           modules = get_modules_to_check
         else
           if ARGV[0] == "install"
@@ -16,32 +16,30 @@ module Checker
           elsif ARGV[0] == "help"
             Checker::Helper.show_help!
           elsif ARGV[0] == "modules"
-            Checker::Helper.show_modules!(self.available_modules)
+            Checker::Helper.show_modules!(available_modules)
           elsif File.exist?(ARGV[0]) && File.directory?(ARGV[0])
-            directory_to_check = ARGV[0].gsub /\/+$/, ''
-            modules = 'all'
+            directory_to_check = ARGV[0].gsub /\/+$/, ""
+            modules = "all"
           else
             modules = ARGV.map(&:downcase)
           end
         end
 
-        if modules.empty? || modules.include?('all')
-          modules = available_modules
-        end
+        modules = available_modules if modules.empty? || modules.include?("all")
 
         check_module_availability(modules) do |result|
-          puts "Modules not available: #{result.join(", ")}.\n"
-          puts "Available: all, #{available_modules.join(", ")}\n"
+          puts "Modules not available: #{result.join(', ')}.\n"
+          puts "Available: all, #{available_modules.join(', ')}\n"
           puts "Check your git config checker.check\n"
           exit 1
         end
 
         module_instances = []
-        if !directory_to_check.nil?
-          files = Dir["#{directory_to_check}/**/*"]
-        else
-          files = modified_files
-        end
+        files = if !directory_to_check.nil?
+                  Dir["#{directory_to_check}/**/*"]
+                else
+                  modified_files
+                end
         modules.each do |mod|
           klass = "Checker::Modules::#{mod.classify}".constantize
           module_instances << klass.new(files.dup)
@@ -56,16 +54,15 @@ module Checker
       end
 
       protected
+
       def available_modules
-        Checker::Modules.constants.map(&:to_s).map(&:underscore) - ['base']
+        Checker::Modules.constants.map(&:to_s).map(&:underscore) - ["base"]
       end
 
       def check_module_availability(modules)
         result = modules - available_modules
         unless result.empty?
-          if block_given?
-            yield(result)
-          end
+          yield(result) if block_given?
         end
       end
 
@@ -77,10 +74,10 @@ module Checker
         @modified_files ||= `git status --porcelain | egrep "^(A|M|R).*" | awk ' { if ($3 == "->") print $4; else print $2 } '`.split
       end
 
-      def show_full_status modules
-        full_status = {:total => 0, :ok => 0, :warning => 0, :fail => 0}
+      def show_full_status(modules)
+        full_status = { total: 0, ok: 0, warning: 0, fail: 0 }
         modules.each do |m|
-          full_status = full_status.merge(m.full_results) { |k, v1, v2| v1 + v2 }
+          full_status = full_status.merge(m.full_results) { |_k, v1, v2| v1 + v2 }
         end
         puts  "-" * 80
         print "#{full_status[:total]} checks preformed, "
