@@ -56,7 +56,7 @@ module Checker
       protected
 
       def available_modules
-        Checker::Modules.constants.map(&:to_s).map(&:underscore) - ["base"]
+        Checker::Modules.constants.map(&:to_s).map(&:underscore) - ["base", "multifile"]
       end
 
       def check_module_availability(modules)
