@@ -4,7 +4,7 @@ module Checker
       extensions 'scss', 'sass'
       private
       def check_one(file, opts = {})
-        if preconditions_for_rails?(file) && Checker::Options.use_rails_for_sass
+        if Checker::Options.use_rails_for_sass && preconditions_for_rails?(file)
           rails_check(file, opts)
         else
           normal_check(file, opts)
