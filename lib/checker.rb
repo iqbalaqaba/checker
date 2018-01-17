@@ -10,7 +10,7 @@ require 'checker/helper'
 require 'checker/options'
 require 'checker/result'
 
-%w[base ruby haml slim pry coffeescript javascript sass yaml conflict console_log rubocop].each do |mod|
+%w[base multifile ruby haml slim pry coffeescript javascript sass yaml conflict console_log rubocop].each do |mod|
   require "checker/modules/#{mod}"
 end
 
