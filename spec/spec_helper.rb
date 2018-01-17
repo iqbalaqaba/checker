@@ -16,12 +16,6 @@ end
 
 require 'checker/cli'
 
-module Checker
-  module Modules
-    class Base
-      def checkout_file file_name, target
-        `cp #{file_name} #{checkout_file_name(target)} > /dev/null 2>&1`
-      end
-    end
-  end
+RSpec.configure do |config|
+  config.raise_errors_for_deprecations!
 end

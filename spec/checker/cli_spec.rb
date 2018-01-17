@@ -19,9 +19,9 @@ end
 describe Checker::CLI do
   context "running without arguments" do
     it "should run checks on modules from git config" do
-      ARGV.stub(:size).and_return 0
-      Checker::CLI.should_receive(:get_modules_to_check).and_return(["bogus"])
-      Checker::CLI.should_receive(:exit).with(0).and_return true
+      allow(ARGV).to receive(:size).and_return 0
+      expect(Checker::CLI).to receive(:get_modules_to_check).and_return(["bogus"])
+      expect(Checker::CLI).to receive(:exit).with(0).and_return true
       Checker::CLI.execute
     end
   end
@@ -29,8 +29,8 @@ describe Checker::CLI do
   context "running with argument" do
     it "should run check on modules from argument" do
       stub_const("ARGV", ["pry"])
-      Checker::CLI.should_not_receive(:get_modules_to_check)
-      Checker::CLI.should_receive(:exit).with(0).and_return true
+      expect(Checker::CLI).not_to receive(:get_modules_to_check)
+      expect(Checker::CLI).to receive(:exit).with(0).and_return true
       Checker::CLI.execute
     end
   end

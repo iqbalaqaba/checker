@@ -4,9 +4,9 @@ describe Checker::Modules::ConsoleLog do
   it 'checks coffee and js files' do
     files = ['a.rb', 'b.js.erb', 'c.r', 'd.yaml', 'e.yml', 'f.coffee', 'g.js']
     mod = Checker::Modules::ConsoleLog.new(files)
-    mod.stub(:check_one).and_return(stub(:success? => true, :status => :ok))
-    mod.should_receive(:check_one).exactly(2).times
-    mod.check 
+    allow(mod).to receive(:check_one).and_return(double(:success? => true, :status => :ok))
+    expect(mod).to receive(:check_one).exactly(2).times
+    mod.check
   end
 
   describe "does find console.log" do
@@ -16,17 +16,17 @@ describe Checker::Modules::ConsoleLog do
     end
 
     it "results to be true if prevent_commit_on_warning is set to false" do
-      Checker::Options.stub(:prevent_commit_on_warning).and_return(false)
-      @mod.check.should be_true
+      allow(Checker::Options).to receive(:prevent_commit_on_warning).and_return(false)
+      expect(@mod.check).to be_truthy
     end
 
     it "results to be false if prevent_commit_on_warning is set to true" do
-      Checker::Options.stub(:prevent_commit_on_warning).and_return(true)
-      @mod.check.should be_false
+      allow(Checker::Options).to receive(:prevent_commit_on_warning).and_return(true)
+      expect(@mod.check).to be_falsey
     end
 
     it "prints proper message" do
-      @mod.should_receive(:print_warning_message)
+      expect(@mod).to receive(:print_warning_message)
       @mod.check
     end
   end
@@ -38,11 +38,11 @@ describe Checker::Modules::ConsoleLog do
     end
 
     it "results to be true" do
-      @mod.check.should be_true
+      expect(@mod.check).to be_truthy
     end
 
     it "prints proper message" do
-      @mod.should_receive(:print_success_message)
+      expect(@mod).to receive(:print_success_message)
       @mod.check
     end
   end
