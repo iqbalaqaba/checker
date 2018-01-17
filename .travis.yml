@@ -9,3 +9,4 @@ notifications:
     recipients:
       - jacek.jakubik@netguru.pl
 
+before_install: gem update --system
