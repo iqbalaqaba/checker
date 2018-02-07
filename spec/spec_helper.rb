@@ -1,6 +1,4 @@
 require "digest/md5"
-require "coveralls"
-Coveralls.wear!
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), "..", "lib"))
 

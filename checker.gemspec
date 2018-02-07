@@ -15,7 +15,6 @@ Gem::Specification.new do |s|
   s.homepage = "http://github.com/netguru/checker"
   s.add_dependency "colorize", "~> 0.8.0"
   s.add_dependency "rubocop", "~> 0.52.0"
-  s.add_development_dependency "coveralls"
   s.add_development_dependency "guard-rspec"
   s.add_development_dependency "rake"
   s.add_development_dependency "rspec"
