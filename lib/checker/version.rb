@@ -1,3 +1,3 @@
 module Checker
-  VERSION = "0.8.0.beta".freeze
+  VERSION = "0.8.0.beta2".freeze
 end
