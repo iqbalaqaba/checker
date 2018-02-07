@@ -9,7 +9,7 @@ version: 2
     - save_cache:
         key: gems-{{ checksum "Gemfile.lock" }}
         paths:
-          - ~/app/vendor/bundle
+          - /usr/local/bundle
     - run: bundle exec rake
   working_directory: ~/app
   environment:
