@@ -3,15 +3,17 @@ version: 2
 .build_template: &build_definition
   steps:
     - checkout
+    - run: sudo apt-get update && apt-get install -y git-core
+    - run: gem install bundler
     - restore_cache:
         keys:
-          - v2-checker-bundle-{{ .Environment.CIRCLE_JOB }}-{{ checksum "Gemfile.lock" }}
-          - v2-checker-bundle-{{ .Environment.CIRCLE_JOB }}-
+          - gems-{{ checksum "Gemfile.lock" }}
     - run: bundle check || bundle install
     - save_cache:
-        key: v2-checker-bundle-{{ .Environment.CIRCLE_JOB }}-{{ checksum "Gemfile.lock" }}
+        keys:
+          - gems-{{ checksum "Gemfile.lock" }}
         paths:
-          - /usr/local/bundle
+          - ~/app/vendor/bundle
     - run: bundle exec rake
   working_directory: ~/app
 
