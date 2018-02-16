@@ -1,26 +1,12 @@
 version: 2
 
-.test_template: &test_definition
-  steps:
-    - attach_workspace:
-        at: ~/app
-    - run: gem install bundler
-    - run: bundle config path ~/app/vendor/bundle
-    - run: bundle exec rake
-  working_directory: ~/app
-  environment:
-    - LANG: C.UTF-8
-
 .build_template: &build_definition
   steps:
     - attach_workspace:
         at: ~/app
     - run: gem install bundler
     - run: bundle install --path ~/app/vendor/bundle
-    - persist_to_workspace:
-        root: ~/app
-        paths:
-          - .
+    - run: bundle exec rake
   working_directory: ~/app
   environment:
     - LANG: C.UTF-8
@@ -32,9 +18,9 @@ jobs:
     steps:
       - checkout
       - persist_to_workspace:
-          root: ~/app
+          root: ~
           paths:
-            - .
+            - app
     working_directory: ~/app
 
   build_ruby2_5:
@@ -54,24 +40,6 @@ jobs:
     docker:
       - image: ruby:2.2
 
-  test_ruby2_5:
-    <<: *test_definition
-    docker:
-      - image: ruby:2.5
-  test_ruby2_4:
-    <<: *test_definition
-    docker:
-      - image: ruby:2.4
-  test_ruby2_3:
-    <<: *test_definition
-    docker:
-      - image: ruby:2.3
-  test_ruby2_2:
-    <<: *test_definition
-    docker:
-      - image: ruby:2.2
-
-
 workflows:
   version: 2
   build_ruby_versions:
@@ -89,17 +57,3 @@ workflows:
       - build_ruby2_2:
           requires:
             - prepare
-
-      - test_ruby2_5:
-          requires:
-            - build_ruby2_5
-      - test_ruby2_4:
-          requires:
-            - build_ruby2_4
-      - test_ruby2_3:
-          requires:
-            - build_ruby2_3
-      - test_ruby2_2:
-          requires:
-            - build_ruby2_2
-
