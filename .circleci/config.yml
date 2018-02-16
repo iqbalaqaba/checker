@@ -9,6 +9,7 @@ version: 2
   working_directory: ~/app
   environment:
     - LANG: C.UTF-8
+    - BUNDLE_PATH: ~/app/vendor/bundle
 
 jobs:
   prepare:
