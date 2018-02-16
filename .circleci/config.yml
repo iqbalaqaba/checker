@@ -26,7 +26,6 @@ jobs:
   environment:
     - LANG: C.UTF-8
 
-jobs:
   build_ruby2_5:
     <<: *build_definition
     docker:
