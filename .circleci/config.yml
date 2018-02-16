@@ -4,8 +4,11 @@ version: 2
   steps:
     - attach_workspace:
         at: ~/app
+    - run: gem install bundler
     - run: bundle exec rake
   working_directory: ~/app
+  environment:
+    - LANG: C.UTF-8
 
 jobs:
   prepare:
