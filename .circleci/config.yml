@@ -18,9 +18,9 @@ jobs:
     steps:
       - checkout
       - persist_to_workspace:
-          root: ~
+          root: ~/app
           paths:
-            - app
+            - .
     working_directory: ~/app
 
   build_ruby2_5:
